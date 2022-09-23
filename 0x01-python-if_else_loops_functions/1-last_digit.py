@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import random
 number = random.randint(-10000, 10000)
-number = str(number)
+number = "{}".format(number)
 x = int(number[-1])
 if number[0] == '-':
     x = x * -1
