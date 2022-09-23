@@ -6,7 +6,7 @@ x = abs(int(number[-1]))
 if number[0] == '-':
     x = x * -1
 if x > 5:
-    print(f"Last digit of {number}, is {x:d} and is greater than 5")
+    print(f"Last digit of {number} is {x:d} and is greater than 5")
 elif int(number[-1]) == 0:
     print(f"Last digit of {number} is {x:d} and is 0")
 elif x < 6 and x:
