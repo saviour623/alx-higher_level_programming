@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-41;320;0cdef uppercase(str):
+def uppercase(str):
     str1 = ""
     for i in str:
         if ord(i) >= 97 and ord(i) <= 122:
