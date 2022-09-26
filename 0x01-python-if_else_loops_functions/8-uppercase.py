@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-def uppercase(str):
+41;320;0cdef uppercase(str):
     str1 = ""
     for i in str:
         if ord(i) >= 97 and ord(i) <= 122:
@@ -7,4 +7,3 @@ def uppercase(str):
         else:
             str1 += i
     print("{:s}".format(str1))
-uppercase("hello boy")
