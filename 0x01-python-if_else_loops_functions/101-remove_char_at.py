@@ -5,4 +5,4 @@ def remove_char_at(str, n):
         if n == str.index(i):
             continue
         strn += i
-    print(strn)
+    print("{}".format(strn))
