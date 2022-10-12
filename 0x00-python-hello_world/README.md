@@ -1,2 +1,1 @@
-This directory contains:
-1. A shell script that runs a python script
+## 0x00. Python - Hello, World

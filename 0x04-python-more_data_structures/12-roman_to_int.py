@@ -1,45 +1,45 @@
 #!/usr/bin/python3
-def roman_to_int(roman_string):
-    # Fail checks, none, not a string
-    if not roman_string:
-        return 0
-    if not isinstance(roman_string, str):
-        return 0
-    if not roman_string.isupper():
-        return 0
-    # Dictionary for roman numerals
-    r_dict = {
-        "I": 1,
-        "IV": 4,
-        "V": 5,
-        "IX": 9,
-        "X": 10,
-        "L": 50,
-        "C": 100,
-        "D": 500,
-        "M": 1000
-    }
 
-    result = 0
-    temp = list(roman_string)
-    # Concat 4 and 9s
-    if len(temp) > 1:
-        idx = 0
-        for i in temp:
-            try:
-                if temp[idx] == 'I' and temp[idx + 1] == 'V':
-                    temp[idx:idx + 2] = [''.join(temp[idx:idx + 2])]
-            except IndexError:
-                pass
-            try:
-                if temp[idx] == 'I' and temp[idx + 1] == 'X':
-                    temp[idx:idx + 2] = [''.join(temp[idx:idx + 2])]
-            except IndexError:
-                pass
-            idx += 1
-    # Search in dict for correct numbers and add
-    for k, v in r_dict.items():
-        for index in temp:
-            if index == k:
-                result += v
+def _get_value(char):
+    """
+    Returns the roman value of a character
+    None if its not a Roman Character
+    """
+    romans = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 100
+    }
+    char = char.upper()
+    if char in romans:
+        return romans[char]
+    return None
+
+
+def roman_to_int(roman):
+    """
+    Converts a roman numerals to Decimal
+    Args:
+        roman - the string f roman numerals
+    """
+
+    if not isinstance(roman, str) or roman is None:
+        return 0
+
+    result, prev, cur = 0, 0, 0
+
+    for c in roman:
+        cur = _get_value(c)
+        if cur is None:
+            raise ValueError("Wrong input")
+        if cur > prev:
+            result -= prev
+            cur -= prev
+        result += cur
+        prev = cur
+
     return result

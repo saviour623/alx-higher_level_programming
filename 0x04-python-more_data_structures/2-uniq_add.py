@@ -1,10 +1,9 @@
 #!/usr/bin/python3
+
 def uniq_add(my_list=[]):
-    res_list = []
-    res = 0
-    for item in my_list:
-        if item not in res_list:
-            res_list.append(item)
-    for uniqs in res_list:
-        res += uniqs
-    return res
+    """
+    sum all unique integers in a list (only once for each integer
+    """
+    if my_list is None:
+        return None
+    return sum(set(my_list))

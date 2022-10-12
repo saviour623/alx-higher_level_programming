@@ -1,11 +1,11 @@
 #!/usr/bin/python3
+
 def divisible_by_2(my_list=[]):
-    if not my_list:
-        return my_list
-    new_list = list(my_list)
-    for index in new_list:
-        if index % 2 == 0:
-            new_list[index] = True
-        else:
-            new_list[index] = False
-    return new_list
+    """
+    find the values divisible by two in list
+    Args:
+        my_list - list to search
+    Return:
+        list of True or False
+    """
+    return list(map(lambda x: False if x % 2 else True, my_list))
