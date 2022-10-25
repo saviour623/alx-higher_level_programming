@@ -1,23 +1,69 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /**
- * check_cycle - finds the index at which a loop starts
- * @head: list head
+ * _realloc - Reallocates a memory block
+ * @ptr: The pointer to the previous memory block
+ * @old_size: The size of the old memory block
+ * @new_size: The size of the new memory block
  *
- * Return: 0 if no cycle 1 if there is cycle
+ * Return: The pointer to the new memory block otherwise NULL
  */
-int check_cycle(listint_t *head)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	listint_t *fast = head, *slow = head;
+	void *new_ptr;
+	unsigned int min_size = old_size < new_size ? old_size : new_size;
+	unsigned int i;
 
-	if (!head || !(head->next))
-		return (0);
-	while (slow && fast && fast->next)
+	if (new_size == old_size)
+		return (ptr);
+	if (ptr != NULL)
 	{
-		slow = slow->next;
-		fast = fast->next->next;
+		if (new_size == 0)
+		{
+			free(ptr);
+			return (NULL);
+		}
+		new_ptr = malloc(new_size);
+		if (new_ptr != NULL)
+		{
+			for (i = 0; i < min_size; i++)
+				*((char *)new_ptr + i) = *((char *)ptr + i);
+			free(ptr);
+			return (new_ptr);
+		}
+		free(ptr);
+		return (NULL);
+	}
+	else
+	{
+		new_ptr = malloc(new_size);
+		return (new_ptr);
+	}
+}
+
+
+
+/**
+ * check_cycle - checks if a singly linked list has a cycle in it
+ * @list: list head
+ * Return: 0 if no, 1 if yes
+ */
+
+int check_cycle(listint_t *list)
+{
+	listint_t *fast, *slow = list;
+
+	if (list == NULL)
+		return (0);
+
+	fast = list->next;
+	while (slow != NULL && fast != NULL && fast->next != NULL)
+	{
 		if (slow == fast)
 			return (1);
+		fast = fast->next->next;
+		slow = slow->next;
 	}
 	return (0);
 }

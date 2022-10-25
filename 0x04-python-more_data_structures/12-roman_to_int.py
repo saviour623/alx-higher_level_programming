@@ -1,45 +1,31 @@
 #!/usr/bin/python3
 
-def _get_value(char):
-    """
-    Returns the roman value of a character
-    None if its not a Roman Character
-    """
-    romans = {
-        'I': 1,
-        'V': 5,
-        'X': 10,
-        'L': 50,
-        'C': 100,
-        'D': 500,
-        'M': 100
+
+def roman_to_int(roman_string):
+    """Converts a roman numeral to an integer."""
+    if (not isinstance(roman_string, str) or
+            roman_string is None):
+        return (0)
+
+    roman_dict = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
     }
-    char = char.upper()
-    if char in romans:
-        return romans[char]
-    return None
+    num = 0
 
+    for i in range(len(roman_string)):
+        if roman_dict.get(roman_string[i], 0) == 0:
+            return (0)
 
-def roman_to_int(roman):
-    """
-    Converts a roman numerals to Decimal
-    Args:
-        roman - the string f roman numerals
-    """
+        if (i != (len(roman_string) - 1) and
+                roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]):
+                num += roman_dict[roman_string[i]] * -1
 
-    if not isinstance(roman, str) or roman is None:
-        return 0
-
-    result, prev, cur = 0, 0, 0
-
-    for c in roman:
-        cur = _get_value(c)
-        if cur is None:
-            raise ValueError("Wrong input")
-        if cur > prev:
-            result -= prev
-            cur -= prev
-        result += cur
-        prev = cur
-
-    return result
+        else:
+            num += roman_dict[roman_string[i]]
+    return (num)
